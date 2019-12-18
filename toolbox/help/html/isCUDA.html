@@ -1,0 +1,83 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB R2018b"><title>isCUDA</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.7999992370605px; min-height: 0px; white-space: pre-wrap; color: rgb(213, 80, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: normal; text-align: left;  }
+.S1 { margin: 2px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: normal; text-align: left;  }
+.S2 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: bold; text-align: left;  }
+.CodeBlock { background-color: #F7F7F7; margin: 10px 0 10px 0;}
+.S3 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 0px none rgb(0, 0, 0); border-radius: 4px 4px 0px 0px; padding: 6px 45px 0px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S4 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px 0px 4px 4px; padding: 0px 45px 4px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S5 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 4px; padding: 6px 45px 4px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S6 { margin: 10px 10px 9px 4px; padding: 0px; line-height: 21px; min-height: 0px; white-space: pre-wrap; color: rgb(0, 0, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 14px; font-weight: normal; text-align: left;  }
+.S7 { margin: 10px 0px 20px; padding-left: 0px; font-family: Helvetica, Arial, sans-serif; font-size: 14px;  }
+.S8 { margin-left: 56px; line-height: 21px; min-height: 0px; text-align: left; white-space: pre-wrap;  }
+.S9 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 4px 4px 0px 0px; padding: 6px 45px 4px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S10 { color: rgb(64, 64, 64); padding: 10px 0px 6px 17px; background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px; overflow-x: hidden; line-height: 17.2339992523193px;  }
+.embeddedOutputsErrorElement {min-height: 18px; max-height: 250px; overflow: auto;}
+.embeddedOutputsErrorElement.inlineElement {}
+.embeddedOutputsErrorElement.rightPaneElement {}
+.embeddedOutputsWarningElement{min-height: 18px; max-height: 250px; overflow: auto;}
+.embeddedOutputsWarningElement.inlineElement {}
+.embeddedOutputsWarningElement.rightPaneElement {}
+.diagnosticMessage-wrapper {font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 12px;}
+.diagnosticMessage-wrapper.diagnosticMessage-warningType {color: rgb(255,100,0);}
+.diagnosticMessage-wrapper.diagnosticMessage-warningType a {color: rgb(255,100,0); text-decoration: underline;}
+.diagnosticMessage-wrapper.diagnosticMessage-errorType {color: rgb(230,0,0);}
+.diagnosticMessage-wrapper.diagnosticMessage-errorType a {color: rgb(230,0,0); text-decoration: underline;}
+.diagnosticMessage-wrapper .diagnosticMessage-messagePart {white-space: pre-wrap;}
+.diagnosticMessage-wrapper .diagnosticMessage-stackPart {white-space: pre;}
+.embeddedOutputsTextElement,.embeddedOutputsVariableStringElement {white-space: pre; word-wrap: initial; min-height: 18px; max-height: 250px; overflow: auto;}
+.textElement,.rtcDataTipElement .textElement {padding-top: 3px;}
+.embeddedOutputsTextElement.inlineElement,.embeddedOutputsVariableStringElement.inlineElement {}
+.inlineElement .textElement {}
+.embeddedOutputsTextElement.rightPaneElement,.embeddedOutputsVariableStringElement.rightPaneElement {min-height: 16px;}
+.rightPaneElement .textElement {padding-top: 2px; padding-left: 9px;}
+.S11 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px; padding: 6px 45px 4px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }</style></head><body><div class = rtcContent><h1  class = 'S0'><span>isCUDA</span></h1><div  class = 'S1'><span>Determines if there is a NVidia CUDA enabled GPU in the system. Also, checks if the compute capability is at least 2.1. </span></div><h2  class = 'S2'><span>Syntax</span></h2><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>isCUDA</span></span></div></div><div class="inlineWrapper"><div  class = 'S4'><span style="white-space: pre;"><span>[</span><span class="warning_squiggle_rte warningHighlight">IS</span><span>, </span><span class="warning_squiggle_rte warningHighlight">INFO</span><span>] = isCUDA</span></span></div></div></div><h2  class = 'S2'><span>Description</span></h2><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>isCUDA</span></span></div></div></div><div  class = 'S6'><span>Returns logical </span><span style=' font-family: monospace;'>true</span><span> or </span><span style=' font-family: monospace;'>false</span><span>:</span></div><div  class = 'S1'><span>    </span><span style=' font-family: monospace;'>0</span><span> - no available NVidia GPUs with the compute capability at least 2.1</span></div><div  class = 'S1'><span>    </span><span style=' font-family: monospace;'>1</span><span> - at least one NVidia GPU found and the compute capability is at least 2.1 </span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S5'><span style="white-space: pre;"><span>[</span><span class="warning_squiggle_rte warningHighlight">IS</span><span>, </span><span class="warning_squiggle_rte warningHighlight">INFO</span><span>] = isCUDA</span></span></div></div></div><div  class = 'S6'><span>Also returns the </span><span style=' font-family: monospace;'>INFO</span><span> structure. The structure size is </span><span style=' font-style: italic;'>n</span><span> by </span><span style=' font-family: monospace;'>1</span><span>, where </span><span style=' font-style: italic;'>n</span><span> is the number of NVidia CUDA enable GPUs found, regardles of the compute capability.</span></div><ul  class = 'S7'><li  class = 'S8'><span>INFO.DeviceName - the device name</span></li><li  class = 'S8'><span>INFO.ComputeCapability - the compute capability</span></li></ul><div  class = 'S1'><span style=' font-weight: bold;'>WARNING</span><span>: By default, this function always returns </span><span style=' font-family: monospace;'>false</span><span> on MAC systems as the NIRFAST CUDA procedures are not supported on MAC.</span></div><h2  class = 'S2'><span>Examples</span></h2><div class="CodeBlock"><div class="inlineWrapper outputs"><div  class = 'S9'><span style="white-space: pre;"><span>isCUDA</span></span></div><div  class = 'S10'><div class="inlineElement eoOutputWrapper embeddedOutputsVariableStringElement" uid="77C532F4" data-testid="output_0" data-width="1738" data-height="34" data-hashorizontaloverflow="false" style="width: 1768px; max-height: 261px;"><div class="textElement"><div><span class="variableNameElement">ans = <span class="headerElement">logical</span></span></div><div>   1
+</div></div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>[IS, INFO] = isCUDA</span></span></div><div  class = 'S10'><div class="inlineElement eoOutputWrapper embeddedOutputsVariableStringElement" uid="E3484A19" data-testid="output_1" data-width="1738" data-height="34" data-hashorizontaloverflow="false" style="width: 1768px; max-height: 261px;"><div class="textElement"><div><span class="variableNameElement">IS = <span class="headerElement">logical</span></span></div><div>   1
+</div></div></div><div class="inlineElement eoOutputWrapper embeddedOutputsVariableStringElement" uid="F0671B4F" data-testid="output_2" data-width="1738" data-height="48" data-hashorizontaloverflow="false" style="width: 1768px; max-height: 261px;"><div class="textElement"><div><span class="variableNameElement">INFO = <span class="headerElement">struct with fields:</span></span></div><div>           DeviceName: 'Quadro M2000M'
+    ComputeCapability: 5
+</div></div></div></div></div></div><div  class = 'S1'><span>    </span></div><div  class = 'S1'><span>    MEX File function.</span></div><div  class = 'S1'><span>    Part of NIRFAST package.</span></div><div  class = 'S1'><span>    S. Wojtkiewicz 2018</span></div><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S5'></div></div></div></div><br>
+<!-- 
+##### SOURCE BEGIN #####
+%% isCUDA
+% Determines if there is a NVidia CUDA enabled GPU in the system. Also, checks 
+% if the compute capability is at least 2.1. 
+%% Syntax
+%%
+isCUDA
+[IS, INFO] = isCUDA
+%% Description
+%%
+isCUDA
+%% 
+% Returns logical |true| or |false|:
+% 
+%     |0| - no available NVidia GPUs with the compute capability at least 
+% 2.1
+% 
+%     |1| - at least one NVidia GPU found and the compute capability is at 
+% least 2.1 
+
+[IS, INFO] = isCUDA
+%% 
+% Also returns the |INFO| structure. The structure size is _n_ by |1|, where 
+% _n_ is the number of NVidia CUDA enable GPUs found, regardles of the compute 
+% capability.
+% 
+% * INFO.DeviceName - the device name
+% * INFO.ComputeCapability - the compute capability
+% 
+% *WARNING*: By default, this function always returns |false| on MAC systems 
+% as the NIRFAST CUDA procedures are not supported on MAC.
+%% Examples
+%%
+isCUDA
+[IS, INFO] = isCUDA
+%% 
+%     
+% 
+%     MEX File function.
+% 
+%     Part of NIRFAST package.
+% 
+%     S. Wojtkiewicz 2018
+##### SOURCE END #####
+--></body></html>
