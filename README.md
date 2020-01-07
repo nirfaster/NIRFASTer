@@ -16,4 +16,4 @@ Show help for this function running `help isCUDA` from the command window.
 Run the *test_\*.mlx* MATLAB Live Code examples to learn how to use the supported modalities.
 
 ## License
-See the *LICENSE.md* file for details.
+See the *LICENSE.txt* file for details.
