@@ -1,7 +1,7 @@
 # NIRFASTer
 Open source software for multi-modal optical molecular imaging
 
-![GitHub Logo](/images/logo.png)
+![GitHub Logo](toolbox/help/html/NIRFASTer.png )
 Format: ![Alt Text](url)
 
 
