@@ -1,4 +1,4 @@
-# ![NIRFASTer](toolbox/help/html/LOGO_nirfast_diamond_50x50.png) NIRFASTer
+# ![NIRFASTer](toolbox/help/html/LOGO_nirfast_diamond_25x25.png) NIRFASTer
 Open source software for multi-modal optical molecular imaging
 ![NIRFASTer](toolbox/help/html/NIRFASTer.png )
 
