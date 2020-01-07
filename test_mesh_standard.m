@@ -1,5 +1,5 @@
 close all
-clear varaibles
+clear variables
 clc
 
 %% display properties

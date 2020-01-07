@@ -1,5 +1,5 @@
 close all
-clear varaibles
+clear variables
 clc
 
 %% display properties
@@ -20,8 +20,8 @@ cd(path);
 
 %% load meshes
 
-mesh_2d = load_mesh('circle2000_86_stnd');
-mesh_3d = load_mesh('cylinder_stnd');
+mesh_2d = load_mesh('circle2000_86_spec');
+mesh_3d = load_mesh('cylinder_spec');
 disp('  *** meshes loaded')
 
 %% save meshes
@@ -66,34 +66,9 @@ blob.y = -10; % y position
 blob.r = 10; % radius
 % blob region number, max of current regions + 1
 blob.region = max(unique(mesh_2d.region)) + 1;
-blob.mua = 0.023; % blob absorption in mm^-1
+blob.HbO = 0.020; % oxygenated haemolobin concentration im mM 
+blob.deoxyHb = 0.015; % deoxygenated haemolobin concentration im mM
 mesh_anomaly_2d = add_blob(mesh_2d,blob);
 mesh_anomaly_2d.name = [mesh_anomaly_2d.name '_anomaly'];
 plotmesh(mesh_anomaly_2d)
 
-return
-
-
-
-mesh_3d = load_mesh('cylinder_spec');
-mesh_2d = load_mesh('circle2000_86_spec');
-save_mesh(mesh_2d,'test/test_2d');
-save_mesh(mesh_3d,'test/test_3d');
-
-plotmesh(mesh_2d);
-plotmesh(mesh_3d);
-
-plotmesh_fiducials(mesh_2d);
-plotmesh_fiducials(mesh_3d);
-
-mesh_volume_distribution(mesh_2d)
-mesh_volume_distribution(mesh_3d)
-
-blob.x = 0;
-blob.y = -10;
-blob.r = 10;
-blob.region = 10;
-blob.HbO = 0.023;
-mesh_anom = add_blob(mesh_2d,blob);
-
-plotmesh(mesh_anom);
