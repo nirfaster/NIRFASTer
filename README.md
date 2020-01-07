@@ -20,3 +20,6 @@ Run the *test_\*.mlx* MATLAB Live Code examples to learn how to use the supporte
 
 ## License
 See the *LICENSE.txt* file for details.
+
+## General architecture
+![NIRFASTer](toolbox/help/html/NIRFASTer_general_architecture.png )
