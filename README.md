@@ -1,9 +1,6 @@
-# NIRFASTer
+# NIRFASTer ![NIRFASTer](url)
 Open source software for multi-modal optical molecular imaging
-
-![GitHub Logo](toolbox/help/html/NIRFASTer.png )
-Format: ![Alt Text](url)
-
+![NIRFASTer](toolbox/help/html/NIRFASTer.png )
 
 ## INSTALL
 Set MATLAB path (with subfolders) to the NIRFASTer folder.
