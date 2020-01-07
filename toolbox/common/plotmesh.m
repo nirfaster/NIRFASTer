@@ -1,14 +1,16 @@
-function plotmesh(mesh, plotflag)
-
-% plotmesh(mesh, plotflag)
-%
-% Allows fast and easy viewing of mesh
+function plotmesh(mesh, isPlotFiducials)
+% PLOTMESH Allows fast and easy viewing of meshes in NIRFAST format.
 % 
-% mesh is the input mesh (variable or filename)
-% plotflag is optional, if it is 1, the source/detectors will show
-
-
-
+% SYNTAX:
+%   PLOTMESH(MESH)
+%   PLOTMESH(MESH, ISPLOTFIDUCIALS)
+% 
+%   PLOTMESH(MESH) MESH is NIRFAST mesh structure.
+%   PLOTMESH(MESH, ISPLOTFIDUCIALS) MESH is the NIRFAST mesh structure.
+%    ISPLOTFIDUCIALS is logical true or false if the source/detectors will
+%    show.
+%
+%   Part of NIRFAST package.
 
 %% load mesh
 if ischar(mesh)== 1
@@ -16,10 +18,12 @@ if ischar(mesh)== 1
 end
 
 %% plot sources/detectors
+
 if nargin == 1
-   plotflag = 0;
+   isPlotFiducials = false;
 end
-if plotflag == 1
+
+if isPlotFiducials
     figure;
     setfont(14);
     
