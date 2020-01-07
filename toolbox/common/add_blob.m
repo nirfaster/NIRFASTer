@@ -1,5 +1,4 @@
 function mesh = add_blob(mesh, blob)
-
 % mesh = add_blob(mesh, blob)
 %
 % Adds circular (2D) and spherical (3D) anomalies

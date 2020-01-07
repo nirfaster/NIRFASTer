@@ -83,7 +83,7 @@ height_std = std(h);
 
 %% plot the histogram
 
-figure()
+figure('Name',mesh.name)
 histogram(h,resolution);
 xlabel('elements height /mm','Interpreter','Latex','FontSize',18)
 ylabel('number of heights /-','Interpreter','Latex','FontSize',18)

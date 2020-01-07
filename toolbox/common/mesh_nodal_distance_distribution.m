@@ -82,7 +82,7 @@ dist_std = std(D);
 
 %% plot the histogram
 
-figure()
+figure('Name',mesh.name)
 histogram(D,resolution);
 xlabel('nodal distance /mm','Interpreter','Latex','FontSize',18)
 ylabel('number of edges /-','Interpreter','Latex','FontSize',18)

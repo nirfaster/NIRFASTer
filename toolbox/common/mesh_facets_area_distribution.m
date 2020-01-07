@@ -82,7 +82,7 @@ area_std = std(S);
 
 %% plot the histogram
 
-figure()
+figure('Name',mesh.name)
 histogram(S,resolution);
 xlabel('area /mm$^{2}$','Interpreter','Latex','FontSize',18)
 if mesh.dimension == 3

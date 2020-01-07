@@ -35,25 +35,45 @@ disp('  *** meshes saved')
 mesh_2d = load_mesh(['test' filesep 'test_2d']);
 mesh_3d = load_mesh(['test' filesep 'test_3d']);
 disp('  *** meshes re-loaded')
-return
-%%
+
+%% plot meshes
+
 plotmesh(mesh_2d);
 plotmesh(mesh_3d);
+
+%% plot meshes sources and detectors
 
 plotmesh_fiducials(mesh_2d);
 plotmesh_fiducials(mesh_3d);
 
-mesh_volume_distribution(mesh_2d)
+%% plot meshes statistics
+
 mesh_volume_distribution(mesh_3d)
 
-blob.x = 0;
-blob.y = -10;
-blob.r = 10;
-blob.region = 10;
-blob.mua = 0.023;
-mesh_anom = add_blob(mesh_2d,blob);
+mesh_nodal_distance_distribution(mesh_2d)
+mesh_nodal_distance_distribution(mesh_3d)
 
-plotmesh(mesh_anom);
+mesh_facets_area_distribution(mesh_2d)
+mesh_facets_area_distribution(mesh_3d)
+
+mesh_heights_distribution(mesh_2d)
+mesh_heights_distribution(mesh_3d)
+
+%% add a blob to the 2D meshes
+
+blob.x = 0; % x position
+blob.y = -10; % y position
+blob.r = 10; % radius
+% blob region number, max of current regions + 1
+blob.region = max(unique(mesh_2d.region)) + 1;
+blob.mua = 0.023; % blob absorption in mm^-1
+mesh_anomaly_2d = add_blob(mesh_2d,blob);
+mesh_anomaly_2d.name = [mesh_anomaly_2d.name '_anomaly'];
+plotmesh(mesh_anomaly_2d)
+
+return
+
+
 
 mesh_3d = load_mesh('cylinder_spec');
 mesh_2d = load_mesh('circle2000_86_spec');

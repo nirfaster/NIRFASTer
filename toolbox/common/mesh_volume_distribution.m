@@ -81,7 +81,7 @@ vol_std = std(V);
 
 %% plot the histogram
 
-figure()
+figure('Name',mesh.name)
 histogram(V,resolution);
 if mesh.dimension == 3
     xlabel('element volume /mm$^{3}$','Interpreter','Latex','FontSize',18)
