@@ -18,8 +18,17 @@ Run `nirfasterroot` from the command window.
 ## Where to start
 Run the *test_\*.mlx* MATLAB Live Code examples to learn how to use the supported modalities.
 
+Read functions help.
+
 ## License
 See the *LICENSE.txt* file for details.
 
 ## General architecture
 ![NIRFASTer](toolbox/help/html/NIRFASTer_general_architecture.png )
+
+## References
+[1] aaa
+
+[2] bbb
+
+[3] ccc
