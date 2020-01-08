@@ -81,6 +81,7 @@ elseif mesh.dimension == 3
     end
     
     axis equal;
+    view(3);
 end
 
 if isfield(mesh,'source') && size(mesh.source.coord,1)>2
