@@ -3,7 +3,7 @@
 <toc version="2.0">
 <!-- First tocitem specifies top level in Help browser Contents pane -->
 <!-- This can be a roadmap page, as shown below, or a content page -->
-    <tocitem target="index.html">NIRFAST Toolbox
+    <tocitem target="index.html">NIRFASTer Toolbox
         <!-- Nest tocitems to create hierarchical entries in  Contents-->
         <!-- To include icons, use the following syntax for tocitems: -->
         <!-- <tocitem target="foo.html" image="HelpIcon.NAME"> -->
@@ -15,10 +15,15 @@
         <!-- matlabroot/toolbox/matlab/icons -->
        
         
-        <tocitem target="http://www.dartmouth.edu/~nir/nirfast/" 
-                 image="$toolbox/matlab/icons/webicon.gif">
-            Nirfast Web Site
-        </tocitem>
+        <tocitem target="https://github.com/nirfaster/NIRFASTer">NIRFASTer GitHub</tocitem>
+
+      <tocitem target="test_parallel_acceleraton_support.html">Tests/Examples
+        <tocitem target="test_parallel_acceleraton_support.html">Parallel acceleration support</tocitem>
+        <tocitem target="test_mesh_standard.html">Mesh standard</tocitem>
+        <tocitem target="test_mesh_spectral.html">Mesh spectral</tocitem>
+        <tocitem target="test_Frequency_Domain.html">Frequency domain</tocitem>
+      </tocitem>
         
     </tocitem>
+
 </toc>

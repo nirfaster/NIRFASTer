@@ -1,0 +1,131 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge,IE=9,chrome=1"><meta name="generator" content="MATLAB R2018b"><title>Test parallel acceleraton support (CUDA and OpenMP)</title><style type="text/css">.rtcContent { padding: 30px; } .S0 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 28.7999992370605px; min-height: 0px; white-space: pre-wrap; color: rgb(213, 80, 0); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 24px; font-weight: normal; text-align: left;  }
+.CodeBlock { background-color: #F7F7F7; margin: 10px 0 10px 0;}
+.S1 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 0px none rgb(0, 0, 0); border-radius: 4px 4px 0px 0px; padding: 6px 45px 0px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S2 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 0px none rgb(0, 0, 0); border-radius: 0px; padding: 0px 45px 0px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S3 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px 0px 4px 4px; padding: 0px 45px 4px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S4 { margin: 3px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: bold; text-align: left;  }
+.S5 { margin: 20px 10px 5px 4px; padding: 0px; line-height: 20px; min-height: 0px; white-space: pre-wrap; color: rgb(60, 60, 60); font-family: Helvetica, Arial, sans-serif; font-style: normal; font-size: 20px; font-weight: bold; text-align: left;  }
+.S6 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 4px; padding: 6px 45px 4px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S7 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 0px none rgb(0, 0, 0); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px; padding: 0px 45px 4px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S8 { color: rgb(64, 64, 64); padding: 10px 0px 6px 17px; background: rgb(255, 255, 255) none repeat scroll 0% 0% / auto padding-box border-box; font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px; overflow-x: hidden; line-height: 17.2339992523193px;  }
+.embeddedOutputsErrorElement {min-height: 18px; max-height: 250px; overflow: auto;}
+.embeddedOutputsErrorElement.inlineElement {}
+.embeddedOutputsErrorElement.rightPaneElement {}
+.embeddedOutputsWarningElement{min-height: 18px; max-height: 250px; overflow: auto;}
+.embeddedOutputsWarningElement.inlineElement {}
+.embeddedOutputsWarningElement.rightPaneElement {}
+.diagnosticMessage-wrapper {font-family: Menlo, Monaco, Consolas, "Courier New", monospace; font-size: 12px;}
+.diagnosticMessage-wrapper.diagnosticMessage-warningType {color: rgb(255,100,0);}
+.diagnosticMessage-wrapper.diagnosticMessage-warningType a {color: rgb(255,100,0); text-decoration: underline;}
+.diagnosticMessage-wrapper.diagnosticMessage-errorType {color: rgb(230,0,0);}
+.diagnosticMessage-wrapper.diagnosticMessage-errorType a {color: rgb(230,0,0); text-decoration: underline;}
+.diagnosticMessage-wrapper .diagnosticMessage-messagePart {white-space: pre-wrap;}
+.diagnosticMessage-wrapper .diagnosticMessage-stackPart {white-space: pre;}
+.embeddedOutputsTextElement,.embeddedOutputsVariableStringElement {white-space: pre; word-wrap: initial; min-height: 18px; max-height: 250px; overflow: auto;}
+.textElement,.rtcDataTipElement .textElement {padding-top: 3px;}
+.embeddedOutputsTextElement.inlineElement,.embeddedOutputsVariableStringElement.inlineElement {}
+.inlineElement .textElement {}
+.embeddedOutputsTextElement.rightPaneElement,.embeddedOutputsVariableStringElement.rightPaneElement {min-height: 16px;}
+.rightPaneElement .textElement {padding-top: 2px; padding-left: 9px;}
+.S9 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 0px none rgb(0, 0, 0); border-radius: 0px; padding: 6px 45px 0px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S10 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 4px 4px 0px 0px; padding: 6px 45px 4px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }
+.S11 { border-left: 1px solid rgb(233, 233, 233); border-right: 1px solid rgb(233, 233, 233); border-top: 1px solid rgb(233, 233, 233); border-bottom: 1px solid rgb(233, 233, 233); border-radius: 0px; padding: 6px 45px 4px 13px; line-height: 17.2339992523193px; min-height: 18px; white-space: nowrap; color: rgb(0, 0, 0); font-family: Menlo, Monaco, Consolas, 'Courier New', monospace; font-size: 14px;  }</style></head><body><div class = rtcContent><h1  class = 'S0'><span>Test parallel acceleraton support (CUDA and OpenMP)</span></h1><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S1'><span style="white-space: pre;"><span>close </span><span style="color: rgb(160, 32, 240);">all</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>clear </span><span style="color: rgb(160, 32, 240);">variables</span></span></div></div><div class="inlineWrapper"><div  class = 'S3'><span style="white-space: pre;"><span>clc</span></span></div></div></div><h2  class = 'S4'><span>BODY</span></h2><h2  class = 'S5'><span>set the 'nirfasterroot' as current folder</span></h2><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S6'><span style="white-space: pre;"><span>cd(nirfasterroot);</span></span></div></div></div><h2  class = 'S4'><span>test for compatible GPUs</span></h2><div class="CodeBlock"><div class="inlineWrapper"><div  class = 'S1'><span style="white-space: pre;"><span>[is,info] = isCUDA;</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span style="color: rgb(34, 139, 34);">% show GPUs</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span style="color: rgb(0, 0, 255);">if </span><span>is</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>    </span><span style="color: rgb(0, 0, 255);">for </span><span>ind_gpu = 1:numel(info)</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>        disp([</span><span style="color: rgb(160, 32, 240);">'#' </span><span>num2str(ind_gpu) </span><span style="color: rgb(160, 32, 240);">' GPU:'</span><span>])</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>        disp(info(ind_gpu));</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>    </span><span style="color: rgb(0, 0, 255);">end</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span style="color: rgb(0, 0, 255);">else</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>    disp(</span><span style="color: rgb(160, 32, 240);">' '</span><span>)</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>    disp(</span><span style="color: rgb(160, 32, 240);">'No Nvidia GPUs supporting CUDA found. By default, code will be accelerated in parallel on CPU cores.'</span><span>)</span></span></div></div><div class="inlineWrapper"><div  class = 'S2'><span style="white-space: pre;"><span>    disp(</span><span style="color: rgb(160, 32, 240);">' '</span><span>)</span></span></div></div><div class="inlineWrapper outputs"><div  class = 'S7'><span style="white-space: pre;"><span style="color: rgb(0, 0, 255);">end</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="64AFDA95" data-testid="output_0" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">#1 GPU:</div></div><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="6428F939" data-testid="output_1" data-width="1138" data-height="31" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">           DeviceName: 'Quadro M2000M'
+    ComputeCapability: 5</div></div></div></div><div class="inlineWrapper"><div  class = 'S9'></div></div><div class="inlineWrapper outputs"><div  class = 'S7'><span style="white-space: pre;"><span>disp([</span><span style="color: rgb(160, 32, 240);">'Nvidia CUDA support: ' </span><span>num2str(is)])</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="3134F84A" data-testid="output_2" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">Nvidia CUDA support: 1</div></div></div></div></div><h2  class = 'S4'><span>othet info</span></h2><div class="CodeBlock"><div class="inlineWrapper outputs"><div  class = 'S10'><span style="white-space: pre;"><span>disp(</span><span style="color: rgb(160, 32, 240);">'Default solver:'</span><span>)</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="3B12D7FC" data-testid="output_3" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">Default solver:</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>disp([</span><span style="color: rgb(160, 32, 240);">'  ' </span><span>get_solver])</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="8E5AC067" data-testid="output_4" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">  BiCGStab_GPU</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>disp(</span><span style="color: rgb(160, 32, 240);">' '</span><span>)</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="2CED878D" data-testid="output_5" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement"> </div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>disp(</span><span style="color: rgb(160, 32, 240);">'Other supported solvers:'</span><span>)</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="5AAF07EF" data-testid="output_6" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">Other supported solvers:</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>disp([</span><span style="color: rgb(160, 32, 240);">'  ' </span><span>get_solver(solver_name_CPU)])</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="BEC39A05" data-testid="output_7" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">  BiCGStab_CPU</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>disp([</span><span style="color: rgb(160, 32, 240);">'  ' </span><span>get_solver(solver_name_backslash)])</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="B38878AD" data-testid="output_8" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">  backslash</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>disp([</span><span style="color: rgb(160, 32, 240);">'  ' </span><span>get_solver(solver_name_matlab_iterative)])</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="57DDE2B7" data-testid="output_9" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">  BiCGStab_MATLAB</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>disp(</span><span style="color: rgb(160, 32, 240);">' '</span><span>)</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="482701FD" data-testid="output_10" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement"> </div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>disp(</span><span style="color: rgb(160, 32, 240);">'''help get_solver'' says:'</span><span>)</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="CE2B6120" data-testid="output_11" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">'help get_solver' says:</div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>disp(</span><span style="color: rgb(160, 32, 240);">' '</span><span>)</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement" uid="48F6E06F" data-testid="output_12" data-width="1138" data-height="18" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement"> </div></div></div></div><div class="inlineWrapper outputs"><div  class = 'S11'><span style="white-space: pre;"><span>help </span><span style="color: rgb(160, 32, 240);">get_solver</span></span></div><div  class = 'S8'><div class="inlineElement eoOutputWrapper embeddedOutputsTextElement scrollableOutput" uid="9C9C6EFB" data-scroll-top="0" data-scroll-left="0" data-testid="output_13" data-width="1138" data-height="787" data-hashorizontaloverflow="false" style="width: 1168px; max-height: 261px;"><div class="textElement">  <strong>get_solver</strong> Checks and returns supported solver.
+  
+  SYNTAX:
+   <strong>get_solver</strong>
+   <strong>get_solver</strong>(SOLVER_IN)
+   [SOLVER_OUT] = <strong>get_solver</strong>
+   [SOLVER_OUT] = <strong>get_solver</strong>(SOLVER_IN)
+  
+  [SOLVER_OUT] = <strong>get_solver</strong> Returns the default solver. If a NVidia GPU
+    with CUDA technology is present, the BiConjugate Gradient Stabilized
+    method parallelized over GPU is used. SOLVER_OUT is set to
+    'BiCGStab_GPU'. Otherwise, the BiConjugate Gradient Stabilized method
+    parallelized over GPU is used. SOLVER_OUT is set to 'BiCGStab_CPU'.
+  
+  [SOLVER_OUT] = <strong>get_solver</strong>(SOLVER_IN) Check if the user specified solver
+    SOLVER_IN is supported and copies it onto SOLVER_OUT. Issues warning
+    and returns default solver is SOLVER_IN is not supported. Suportes
+    solvers ranked by speed:
+     - 'BiCGStab_GPU' - BiConjugate Gradient Stabilized method. Iterative
+        solver that converges to the 'backslash' solution with a given
+        tolerance. Parallelized for multithreading with NVidia CUDA. Uses
+        all available power of the strongest NVidia GPU installed. This
+        function is limited to work one a single GPU only. Use this option
+        if you have NVidia GPU(s) installed.
+     - 'BiCGStab_CPU' - BiConjugate Gradient Stabilized method. The CPU
+        version is parallelized for multithreading with OpenMP. Uses all
+        available CPU power. Use this option if you do not have NVidia
+        GPU(s).
+     - 'backslash' - Matlab backslash '\'. It will use direct solver with
+        LU decomposition. Most accurate but slow and memory consuming. Use
+        this solver as a gold standard reference when comparing speed,
+        accuracy, etc.. 
+     - 'BiCGStab_MATLAB' - It will use Matlabs implementation of the
+        BiConjugate Gradient Stabilized method. Use this solver for
+        'BiCGStab_GPU' and 'BiCGStab_CPU' references only. Current (R2018b)
+        implementation is slower compared with the 'backslash' and slows
+        further for COMPLEX (FREQUENCY&gt;0) data. Does not handle COMPLEX
+        data well....
+    SOLVER_IN can be also used in short version as:
+     - 'GPU' for 'BiCGStab_GPU'
+     - 'CPU' for 'BiCGStab_CPU'
+     - '\'   for 'backslash'
+    SOLVER_IN names are accessible using following functions:
+     - 'solver_name_GPU'
+     - 'solver_name_CPU'
+     - 'solver_name_matlab_iterative'
+     - 'solver_name_backslash'    
+ 
+  WARNING: MacOS users, no GPU version supported.
+  
+  See also isCUDA, solver_name_GPU, solver_name_CPU,
+           solver_name_matlab_iterative, femdata_FD, femdata_TR, 
+           femdata_TR_moments, femdata_DCS. 
+  
+    Part of NIRFAST package.
+    S. Wojtkiewicz 2018</div></div></div></div></div></div><br>
+<!-- 
+##### SOURCE BEGIN #####
+%% Test parallel acceleraton support (CUDA and OpenMP)
+
+close all
+clear variables
+clc
+%% BODY
+%% set the 'nirfasterroot' as current folder
+%%
+cd(nirfasterroot);
+%% test for compatible GPUs
+%%
+[is,info] = isCUDA;
+% show GPUs
+if is
+    for ind_gpu = 1:numel(info)
+        disp(['#' num2str(ind_gpu) ' GPU:'])
+        disp(info(ind_gpu));
+    end
+else
+    disp(' ')
+    disp('No Nvidia GPUs supporting CUDA found. By default, code will be accelerated in parallel on CPU cores.')
+    disp(' ')
+end
+
+disp(['Nvidia CUDA support: ' num2str(is)])
+%% othet info
+%%
+disp('Default solver:')
+disp(['  ' get_solver])
+disp(' ')
+disp('Other supported solvers:')
+disp(['  ' get_solver(solver_name_CPU)])
+disp(['  ' get_solver(solver_name_backslash)])
+disp(['  ' get_solver(solver_name_matlab_iterative)])
+disp(' ')
+disp('''help get_solver'' says:')
+disp(' ')
+help get_solver
+##### SOURCE END #####
+--></body></html>

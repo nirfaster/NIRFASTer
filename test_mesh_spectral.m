@@ -1,3 +1,5 @@
+%% Test mesh spectral
+
 close all
 clear variables
 clc
@@ -12,11 +14,8 @@ set(0, 'defaulttextfontsize', font_size);
 set(0, 'defaultfigurecolor', 'w');
 %% BODY
 
-%% set this script location as a current folder
-
-where_am_i = mfilename('fullpath');
-[path, ~, ~] = fileparts(where_am_i);
-cd(path);
+%% set the 'nirfasterroot' as current folder
+cd(nirfasterroot);
 
 %% load meshes
 
@@ -26,14 +25,14 @@ disp('  *** meshes loaded')
 
 %% save meshes
 
-save_mesh(mesh_2d,['test' filesep 'test_2d']);
-save_mesh(mesh_3d,['test' filesep 'test_3d']);
+save_mesh(mesh_2d,[nirfasterroot filesep 'test' filesep 'test_2d']);
+save_mesh(mesh_3d,[nirfasterroot filesep 'test' filesep 'test_3d']);
 disp('  *** meshes saved')
 
 %% re-load meshes
 
-mesh_2d = load_mesh(['test' filesep 'test_2d']);
-mesh_3d = load_mesh(['test' filesep 'test_3d']);
+mesh_2d = load_mesh([nirfasterroot filesep 'test' filesep 'test_2d']);
+mesh_3d = load_mesh([nirfasterroot filesep 'test' filesep 'test_3d']);
 disp('  *** meshes re-loaded')
 
 %% plot meshes
