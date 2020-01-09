@@ -21,7 +21,10 @@
         <tocitem target="test_parallel_acceleraton_support.html">Parallel acceleration support</tocitem>
         <tocitem target="test_mesh_standard.html">Mesh standard</tocitem>
         <tocitem target="test_mesh_spectral.html">Mesh spectral</tocitem>
-        <tocitem target="test_Frequency_Domain.html">Frequency domain</tocitem>
+        <tocitem target="test_Frequency_Domain.html">Frequency domain (FD)</tocitem>
+        <tocitem target="test_Time_Resolved.html">Time-resolved (TR)</tocitem>
+        <tocitem target="test_Diffuse_Correlation_Spectroscopy.html">Diffuse Correlation Spectroscopy (DCS)</tocitem>
+        <tocitem target="test_Bioluminescence.html">Bioluminescence (BLT)</tocitem>
       </tocitem>
         
     </tocitem>

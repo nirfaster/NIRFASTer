@@ -102,6 +102,8 @@ elseif isfield(mesh,'source') && size(mesh.source.coord,1)==1
     else
         legend(p_sour(1), 'Source 1');
     end
+elseif ~isfield(mesh,'source') && isfield(mesh,'meas')
+    legend(p_det(1),'Detector');
 end
 
 xlabel('x position (mm)');
