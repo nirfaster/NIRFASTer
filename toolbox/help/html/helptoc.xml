@@ -17,14 +17,16 @@
         
         <tocitem target="https://github.com/nirfaster/NIRFASTer">NIRFASTer GitHub</tocitem>
 
-      <tocitem target="test_parallel_acceleraton_support.html">Tests/Examples
-        <tocitem target="test_parallel_acceleraton_support.html">Parallel acceleration support</tocitem>
+      <tocitem target="test_parallel_acceleration_support.html">Tests/Examples
+        <tocitem target="test_parallel_acceleration_support.html">Parallel acceleration support</tocitem>
         <tocitem target="test_mesh_standard.html">Mesh standard</tocitem>
         <tocitem target="test_mesh_spectral.html">Mesh spectral</tocitem>
         <tocitem target="test_Frequency_Domain.html">Frequency domain (FD)</tocitem>
         <tocitem target="test_Time_Resolved.html">Time-resolved (TR)</tocitem>
+        <tocitem target="test_TR_moments_solvers_accuracy_and_speed.html">Time-resolved direct moments(TR)</tocitem>
         <tocitem target="test_Diffuse_Correlation_Spectroscopy.html">Diffuse Correlation Spectroscopy (DCS)</tocitem>
         <tocitem target="test_Bioluminescence.html">Bioluminescence (BLT)</tocitem>
+        <tocitem target="test_solvers_speed_and_accuracy.html">Sparse system solvers</tocitem>
       </tocitem>
         
     </tocitem>
