@@ -1,0 +1,8 @@
+# vtk DataFile Version 2.0
+# NIRFAST mesh sources
+ASCII
+DATASET POLYDATA
+POINTS 1 float
+47.042224 59.543962 49.020622
+VERTICES 1 2
+1 0 
