@@ -25,10 +25,3 @@ See the *LICENSE.txt* file for details.
 
 ## General architecture
 ![NIRFASTer](toolbox/help/html/NIRFASTer_general_architecture.png )
-
-## References
-[1] aaa
-
-[2] bbb
-
-[3] ccc
