@@ -15,7 +15,7 @@ function [fn, extension] = remove_extension(fname)
 %% check in/out
 
 narginchk(1,1);
-nargoutchk(2,2);
+nargoutchk(1,2);
 
 %% BODY
 
