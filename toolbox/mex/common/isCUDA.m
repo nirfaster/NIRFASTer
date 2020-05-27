@@ -1,5 +1,5 @@
 % ISCUDA Determines if there is a NVidia CUDA enabled GPU in the system.
-%   Also, checks if the compute capability is at least 2.1. 
+%   Also, checks if the compute capability is at least 3.0. 
 % 
 % SYNTAX:
 %   ISCUDA
