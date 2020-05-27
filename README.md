@@ -5,6 +5,12 @@ Open source software for multi-modal optical molecular imaging
 ## MATLAB Compatibility
 May not work on MATLAB versions earlier than R2016b.
 
+## CUDA Compatibility
+- Compute Capability >= 3.0.
+  > As a rule of thumb, this is true for Nvidia's GPUs released on 2012 (Kepler) and onwards.
+- Nvidia Driver version >= 418.39.
+  > Make sure you use the newest Nvidia drivers. The GPU code was compiled with the CUDA Toolkit 10.1. Thus, drivers >=418.39 should work fine.
+
 ## INSTALL
 Set MATLAB path (with subfolders) to the NIRFASTer folder.
 
@@ -21,7 +27,7 @@ Run the *test_\*.mlx* MATLAB Live Code examples to learn how to use the supporte
 Read functions help.
 
 ## License
-See the *LICENSE.txt* file for details.
+See the [LICENSE.txt](LICENSE.txt) file for details.
 
 ## General architecture
 ![NIRFASTer](toolbox/help/html/NIRFASTer_general_architecture.png )
