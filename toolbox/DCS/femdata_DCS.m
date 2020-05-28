@@ -62,6 +62,12 @@ function [data,varargout] = femdata_DCS(mesh,tau_DCS,varargin)
 %         norm of error of first iteration).
 %       - OPTIONS.divergence_tol (default 1e8);
 %         Relative divergence tolerance (related to first iteration).
+%       - OPTIONS.GPU (default -1);
+%         Index of GPU requested to be used. By default (-1) the GPU of the
+%         highest compute capability is used. Use the 'isCUDA' function to
+%         get the installed GPUs info. The indexing is 0-based and the
+%         indexing order is the same as in the list of GPUs returned by the
+%         'isCUDA' function.
 %   Entries within the structure are optional. The default OPTIONS
 %   structure is returned by 'solver_options' function.
 % 

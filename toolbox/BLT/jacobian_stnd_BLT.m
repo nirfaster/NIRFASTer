@@ -57,7 +57,11 @@ end
 
 % make FEM matrices
 if isCUDA
-    [i_index, j_index, value] = gen_mass_matrix_FD_CUDA(mesh,0);
+    if isfield(OPTIONS,'GPU')
+        [i_index, j_index, value] = gen_mass_matrix_FD_CUDA(mesh,0,OPTIONS.GPU);
+    else
+        [i_index, j_index, value] = gen_mass_matrix_FD_CUDA(mesh,0);
+    end
 else
     [i_index, j_index, value] = gen_mass_matrix_FD_CPU(mesh,0);
 end

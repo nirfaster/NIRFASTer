@@ -8,8 +8,11 @@
 % 
 % SYNTAX:
 %   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_MOMENTS_CUDA(MESH)
+%   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_MOMENTS_CUDA(MESH, GPU)
 %   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_MOMENTS_CUDA(NODES, ELEMENTS, ...
-%                                               BNDVTX, MUA, KAPPA, KSI, CM) 
+%                                               BNDVTX, MUA, KAPPA, KSI, CM)
+%   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_MOMENTS_CUDA(NODES, ELEMENTS, ...
+%                                               BNDVTX, MUA, KAPPA, KSI, CM, GPU)
 % 
 % [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_MOMENTS_CUDA(MESH)
 %   Returns the sparse system matrices A1 and A2 in COO (coordinate
@@ -21,6 +24,11 @@
 %   and S2_VALUE) are returned as REAL and DOUBLE.
 %   MESH - FEM mesh in NIRFAST format. This can be 2D (triangles) or 3D
 %    (tetrahedrons) mesh. 
+% 
+% [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_MOMENTS_CUDA(MESH, GPU)
+%   Works as GEN_MASS_MATRIX_TR_MOMENTS_CUDA(MESH). The GPU is an optional
+%   index of requested GPU, 0-based and up to the number of capable GPUs
+%   installed. Please see also help for the isCUDA function.
 % 
 % [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_MOMENTS_CUDA(NODES, ELEMENTS, ...
 %                                             BNDVTX, MUA, KAPPA, KSI, CM)
@@ -52,6 +60,12 @@
 %    Calculated as speed of light in the vacuum normalized by the node
 %    refractive index. CM should be expressed in mm/s. Can be SINGLE or
 %    DOUBLE precision.
+% 
+% [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_MOMENTS_CUDA(NODES, ELEMENTS, ...
+%                                             BNDVTX, MUA, KAPPA, KSI, CM, GPU)
+%   The GPU is an optional index of requested GPU, 0-based and up to the
+%   number of capable GPUs installed. Please see also help for the isCUDA
+%   function.
 % 
 % GEN_MASS_MATRIX_TR_MOMENTS_CUDA was tested to give symmetric A1 (I_INDEX, J_INDEX,
 % S1_VALUE) and A2 (I_INDEX, J_INDEX, S2_VALUE) matrices. 

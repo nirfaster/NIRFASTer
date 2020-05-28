@@ -77,6 +77,12 @@ function [data] = femdata_stnd_TR_moments(mesh, varargin)
 %        norm of error of first iteration).
 %      - OPTIONS.divergence_tol (default 1e8);
 %        Relative divergence tolerance (related to first iteration).
+%      - OPTIONS.GPU (default -1);
+%        Index of GPU requested to be used. By default (-1) the GPU of the
+%        highest compute capability is used. Use the 'isCUDA' function to
+%        get the installed GPUs info. The indexing is 0-based and the
+%        indexing order is the same as in the list of GPUs returned by the
+%        'isCUDA' function.
 %   Entries within the structure are optional. The default OPTIONS
 %   structure is returned by 'solver_options' function.
 %   The absolute tolerance 'OPTIONS.tolerance' as returned by the
@@ -200,8 +206,12 @@ num_meas = size(mesh.link,1);
 
 
 % make FEM matrices
-if isCUDA
-    [i_index, j_index ,value_1, value_2] = gen_mass_matrix_TR_moments_CUDA(mesh);
+if isCUDA    
+    if isfield(OPTIONS,'GPU')
+        [i_index, j_index ,value_1, value_2] = gen_mass_matrix_TR_moments_CUDA(mesh,OPTIONS.GPU);
+    else
+        [i_index, j_index ,value_1, value_2] = gen_mass_matrix_TR_moments_CUDA(mesh);
+    end
 else
     [i_index, j_index ,value_1, value_2] = gen_mass_matrix_TR_moments_CPU(mesh);
 end

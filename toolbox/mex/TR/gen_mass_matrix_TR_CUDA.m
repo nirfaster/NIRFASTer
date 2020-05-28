@@ -6,8 +6,11 @@
 % 
 % SYNTAX:
 %   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_CUDA(MESH, DT)
+%   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_CUDA(MESH, DT, GPU)
 %   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_CUDA(NODES, ELEMENTS, ...
-%                                               BNDVTX, MUA, KAPPA, KSI, CM, DT) 
+%                                               BNDVTX, MUA, KAPPA, KSI, CM, DT)
+%   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_CUDA(NODES, ELEMENTS, ...
+%                                               BNDVTX, MUA, KAPPA, KSI, CM, DT, GPU)
 % 
 %   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_CUDA(MESH, DT)
 %       Returns the sparse system matrices A1 and A2 in COO (coordinate
@@ -21,6 +24,11 @@
 %        (triangles) or 3D (tetrahedrons) mesh.
 %       DT - time integration step in seconds. Can be SINGLE or DOUBLE
 %        precision. 
+% 
+%   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_CUDA(MESH, DT, GPU)
+%       Works as GEN_MASS_MATRIX_TR_CUDA(MESH, DT). The GPU is an optional
+%       index of requested GPU, 0-based and up to the number of capable
+%       GPUs installed. Please see also help for the isCUDA function.
 % 
 %   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_CUDA(NODES, ELEMENTS, ...
 %                                               BNDVTX, MUA, KAPPA, KSI, CM, DT)
@@ -55,6 +63,12 @@
 %       DT - time integration step in seconds. Can be SINGLE or DOUBLE
 %        precision. 
 % 
+%   [I_INDEX, J_INDEX, S1_VALUE, S2_VALUE] = GEN_MASS_MATRIX_TR_CUDA(NODES, ELEMENTS, ...
+%                                               BNDVTX, MUA, KAPPA, KSI, CM, DT, GPU)
+%       The GPU is an optional index of requested GPU, 0-based and up to
+%       the number of capable GPUs installed. Please see also help for the
+%       isCUDA function. 
+% 
 % GEN_MASS_MATRIX_TR_CUDA was tested to give symmetric A1 (I_INDEX, J_INDEX,
 % S1_VALUE) and A2 (I_INDEX, J_INDEX, S2_VALUE) matrices. 
 %
@@ -86,7 +100,7 @@
 %       [3] Arridge S.R. et al. A finite element approach for modeling photon
 %       transport in tissue. Med. Phys., 20, 1993, s. 299–309.
 % 
-% See also GEN_MASS_MATRIX_TR_CPU, GET_FIELD_TR_CUDA, GET_FIELD_TR_CPU.
+% See also GEN_MASS_MATRIX_TR_CPU, GET_FIELD_TR_CUDA, GET_FIELD_TR_CPU, ISCUDA.
 % 
 %   MEX File function.
 %   Part of NIRFAST package.

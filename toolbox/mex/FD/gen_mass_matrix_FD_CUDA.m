@@ -6,8 +6,11 @@
 % 
 % SYNTAX:
 %   [I_INDEX, J_INDEX, S_VALUE] = GEN_MASS_MATRIX_FD_CUDA(MESH, F)
+%   [I_INDEX, J_INDEX, S_VALUE] = GEN_MASS_MATRIX_FD_CUDA(MESH, F, GPU)
 %   [I_INDEX, J_INDEX, S_VALUE] = GEN_MASS_MATRIX_FD_CUDA(NODES, ELEMENTS, ...
 %                                   BNDVTX, MUA, KAPPA, KSI, CM, F)
+%   [I_INDEX, J_INDEX, S_VALUE] = GEN_MASS_MATRIX_FD_CUDA(NODES, ELEMENTS, ...
+%                                   BNDVTX, MUA, KAPPA, KSI, CM, F, GPU)
 % 
 % 
 %   [I_INDEX, J_INDEX, S_VALUE] = GEN_MASS_MATRIX_FD_CUDA(MESH, F)
@@ -20,6 +23,11 @@
 %       MESH - FEM mesh in NIRFAST structure format. This can be 2D
 %        (triangles) or 3D (tetrahedrons) mesh.
 %       F - source frequency in Hz. Can be SINGLE or DOUBLE precision.
+% 
+%   [I_INDEX, J_INDEX, S_VALUE] = GEN_MASS_MATRIX_FD_CUDA(MESH, F, GPU)
+%       Works as GEN_MASS_MATRIX_FD_CUDA(MESH, F). The GPU is an optional
+%       index of requested GPU, 0-based and up to the number of capable
+%       GPUs installed. Please see also help for the isCUDA function.
 % 
 %   [I_INDEX, J_INDEX, S_VALUE] = GEN_MASS_MATRIX_FD_CUDA(NODES, ELEMENTS, ...
 %                                   BNDVTX, MUA, KAPPA, KSI, CM, F)
@@ -53,6 +61,12 @@
 %        DOUBLE precision. 
 %       F - source frequency in Hz. Can be SINGLE or DOUBLE precision.
 % 
+%   [I_INDEX, J_INDEX, S_VALUE] = GEN_MASS_MATRIX_FD_CUDA(NODES, ELEMENTS, ...
+%                                   BNDVTX, MUA, KAPPA, KSI, CM, F, GPU)
+%       The GPU is an optional index of requested GPU, 0-based and up to
+%       the number of capable GPUs installed. Please see also help for the
+%       isCUDA function. 
+% 
 % GEN_MASS_MATRIX_FD_CUDA was tested to give symmetric A (I_INDEX, J_INDEX,
 % S_VALUE) matrices. 
 %
@@ -82,7 +96,7 @@
 % 
 % See also GEN_MASS_MATRIX_FD_CPU, GEN_MASS_MATRIX_TR_CPU,
 %          GEN_MASS_MATRIX_TR_CUDA, GET_FIELD_FD_CPU, GET_FIELD_FD_CUDA,
-%          GET_FIELD_TR_CPU, GET_FIELD_TR_CUDA.
+%          GET_FIELD_TR_CPU, GET_FIELD_TR_CUDA, ISCUDA.
 % 
 %   MEX File function.
 %   Part of NIRFAST package.
