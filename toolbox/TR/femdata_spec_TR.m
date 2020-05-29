@@ -9,6 +9,7 @@ function [data] = femdata_spec_TR(mesh,t,dt,varargin)
 %   [DATA] = FEMDATA_SPEC_TR(MESH, T, DT)
 %   [DATA] = FEMDATA_SPEC_TR(MESH, T, DT, 'field')
 %   [DATA] = FEMDATA_SPEC_TR(MESH, T, DT, 'field', SOLVER)
+%   [DATA] = FEMDATA_SPEC_TR(MESH, T, DT, 'field', OPTIONS)
 %   [DATA] = FEMDATA_SPEC_TR(MESH, T, DT, 'field', SOLVER, OPTIONS)
 %   [DATA] = FEMDATA_SPEC_TR(MESH, [], [], NUM_DT, N_MEAN_TIME)
 %   [DATA] = FEMDATA_SPEC_TR(MESH, [], [], NUM_DT, N_MEAN_TIME, SOLVER)
@@ -143,7 +144,7 @@ if ~isempty(varargin)
         if ischar(varargin{2}) || isstring(varargin{2})
             % user specified, sanity check
             solver = get_solver(varargin{2});
-        else
+        elseif ~isstruct(varargin{2}) && ~isempty(varargin{2})
             N_mean_time = varargin{2};
             if N_mean_time <= 0
                 error('Bad number of mean time of flights. Should be >0. Please see the help for details on how to use this function.')
