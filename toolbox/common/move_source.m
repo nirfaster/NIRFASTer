@@ -32,6 +32,8 @@ end
 %% check if mus_eff is unrealistic for the mesh size
 
 scatt_dist = 1/mean(mus_eff);
+display(['mus_eff: ', num2str(mean(mus_eff))])
+display(['scattering_distance: ', num2str(scatt_dist)])
 mesh_size = max(mesh.nodes,[],1)-min(mesh.nodes,[],1);
 if scatt_dist*10 > min(mesh_size)
     warning(['Mesh is too small for the scattering coefficient given. '...
