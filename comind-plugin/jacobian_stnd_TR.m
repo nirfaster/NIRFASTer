@@ -72,27 +72,27 @@ if ~isempty(varargin)
     if length(varargin) >= 2
         % do we want centralised moments
         if ischar(varargin{2}) || isstring(varargin{2})
-            if strcmp(varargin{5},'central')
+            if strcmp(varargin{2},'central')
                 central = true;
             end
         end
     end
     if length(varargin) >= 3
         % second mesh basis
-        if isstruct(varargin{2}) || isempty(varargin{2})
-            second_mesh_basis = varargin{2};
+        if isstruct(varargin{3}) || isempty(varargin{3})
+            second_mesh_basis = varargin{3};
         else
             error('Bad 3nd argument value. A mesh structure expected. Please see help for details on how to use this function.')
         end
     end
     if length(varargin) >= 4
         % solver
-        if ischar(varargin{3}) || isstring(varargin{3})
+        if ischar(varargin{4}) || isstring(varargin{4})
             % user specified, sanity check
-            solver = get_solver(varargin{3});
-        elseif isstruct(varargin{3})
-            OPTIONS = varargin{3};
-        elseif isempty(varargin{3})
+            solver = get_solver(varargin{4});
+        elseif isstruct(varargin{4})
+            OPTIONS = varargin{4};
+        elseif isempty(varargin{4})
             solver = get_solver;
         else
             error('Bad 4th argument value. Solver name or solver settings structure expected. Please see help for details on how to use this function.')
@@ -100,9 +100,9 @@ if ~isempty(varargin)
     end
     if length(varargin) >= 5
         % solver options
-        if isstruct(varargin{4})
-            OPTIONS = varargin{4};
-        elseif isempty(varargin{4})
+        if isstruct(varargin{5})
+            OPTIONS = varargin{5};
+        elseif isempty(varargin{5})
             OPTIONS = solver_options;
         else
             error('Bad 5th argument value. Solver settings structure expected. Please see help for details on how to use this function.')
@@ -110,8 +110,8 @@ if ~isempty(varargin)
     end
     if length(varargin) == 6
         % if scattering for CW data as well
-        if ischar(varargin{5}) || isstring(varargin{5})
-            if strcmp(varargin{5},'all')
+        if ischar(varargin{6}) || isstring(varargin{6})
+            if strcmp(varargin{6},'all')
                 isAll = true;
             end
         else
@@ -387,7 +387,7 @@ if order >= 2
     disp('2nd moment Jacobian normalised')
     if central  % REF[4] - derivative of equation (3)
        disp('Centralising second moment')
-       J.second = J.second - 4*J.first;
+       J.second.complete = J.second.complete - 4*J.first.complete;
     end
 end
 
