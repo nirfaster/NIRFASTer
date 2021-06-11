@@ -23,11 +23,12 @@ function [J,data] = jacobian_stnd_TR(mesh,varargin)
 % SYNTAX:
 %  [J,DATA] = JACOBIAN_STND_TR(MESH)
 %  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER)
-%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,SECOND_MESH_BASIS)
-%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,SECOND_MESH_BASIS,SOLVER)
-%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,SECOND_MESH_BASIS,SOLVER,OPTIONS)
-%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,SECOND_MESH_BASIS,SOLVER,OPTIONS,'all') 
-%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,[],[],[],[])
+%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,'central')
+%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,'central',SECOND_MESH_BASIS)
+%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,'central',SECOND_MESH_BASIS,SOLVER)
+%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,'central',SECOND_MESH_BASIS,SOLVER,OPTIONS)
+%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,'central',SECOND_MESH_BASIS,SOLVER,OPTIONS,'all') 
+%  [J,DATA] = JACOBIAN_STND_TR(MESH,ORDER,'central',[],[],[],[])
 %
 %REFS:
 %  [1] Simon R. Arridge and M. Schweiger, "Photon-measurement density functions.
@@ -36,17 +37,19 @@ function [J,data] = jacobian_stnd_TR(mesh,varargin)
 %      and Fourier transformed data in time-domain diffuse optical tomography. JOSA A, 37(12), 1845-1856.
 %  [3] Arridge, S. R. (1995). Photon-measurement density functions. 
 %      Part I: Analytical forms. Applied Optics, 34(31), 7395-7409.
+%  [4] Wabnitz et al., 2020, "Depth-selective data analysis for time-domain fNIRS: moments vs. time windows"
 
 
 %% check in/out
 
-narginchk(1,6);
+narginchk(1,7);
 nargoutchk(0,2);
 
 %% get optional inputs, handle variable input
 
 % default
 order = 2;
+central = false;
 second_mesh_basis = [];
 solver = get_solver;
 OPTIONS = solver_options;
@@ -67,6 +70,14 @@ if ~isempty(varargin)
         end
     end
     if length(varargin) >= 2
+        % do we want centralised moments
+        if ischar(varargin{2}) || isstring(varargin{2})
+            if strcmp(varargin{5},'central')
+                central = true;
+            end
+        end
+    end
+    if length(varargin) >= 3
         % second mesh basis
         if isstruct(varargin{2}) || isempty(varargin{2})
             second_mesh_basis = varargin{2};
@@ -74,7 +85,7 @@ if ~isempty(varargin)
             error('Bad 3nd argument value. A mesh structure expected. Please see help for details on how to use this function.')
         end
     end
-    if length(varargin) >= 3
+    if length(varargin) >= 4
         % solver
         if ischar(varargin{3}) || isstring(varargin{3})
             % user specified, sanity check
@@ -87,7 +98,7 @@ if ~isempty(varargin)
             error('Bad 4th argument value. Solver name or solver settings structure expected. Please see help for details on how to use this function.')
         end
     end
-    if length(varargin) >= 4
+    if length(varargin) >= 5
         % solver options
         if isstruct(varargin{4})
             OPTIONS = varargin{4};
@@ -97,7 +108,7 @@ if ~isempty(varargin)
             error('Bad 5th argument value. Solver settings structure expected. Please see help for details on how to use this function.')
         end
     end
-    if length(varargin) == 5
+    if length(varargin) == 6
         % if scattering for CW data as well
         if ischar(varargin{5}) || isstring(varargin{5})
             if strcmp(varargin{5},'all')
@@ -107,7 +118,7 @@ if ~isempty(varargin)
             error('Bad 6th argument value. Text expected. Please see help for details on how to use this function.')
         end
     end
-    if length(varargin) > 5
+    if length(varargin) > 6
         error('Bad arguments. Please see the help for details on how to use this function.')
     end
 end
@@ -374,6 +385,10 @@ if order >= 2
                   - data.complex(:,:,3) .* J0.complex / data.complex(:,:,1).^2;
     J.second = J2;
     disp('2nd moment Jacobian normalised')
+    if central  % REF[4] - derivative of equation (3)
+       disp('Centralising second moment')
+       J.second = J.second - 4*J.first;
+    end
 end
 
 % put back the boundary data with NaN for disabled pairs and for all moments
