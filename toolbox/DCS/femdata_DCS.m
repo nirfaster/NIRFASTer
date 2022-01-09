@@ -47,7 +47,7 @@ function [data,varargout] = femdata_DCS(mesh,tau_DCS,varargin)
 %   wavelengths. Expressed in nm.
 % 
 % [DATA] = FEMDATA_DCS(MESH, TAU_DCS, WV_DCS, SOLVER) User specified SOLVER
-%   is used. See help of the 'get_solvers' function for how to use solvers.
+%   is used. See help of the 'get_solver' function for how to use solvers.
 % 
 % [DATA] = FEMDATA_DCS(MESH, TAU_DCS, WV_DCS, OPTIONS) Default solver is
 %   used. See help of the 'get_solvers' function for how the default solver
