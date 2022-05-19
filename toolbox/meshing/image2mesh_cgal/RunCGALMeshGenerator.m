@@ -1,4 +1,4 @@
-function [e p] = RunCGALMeshGenerator(mask,param)
+function [e, p] = RunCGALMeshGenerator(mask, param)
 % Runs CGAL mesh generator on 3D matrix 'mask'
 % For info on 'param' and 'info' refer to 'image2mesh_cgal.m'
 % 
@@ -23,17 +23,33 @@ tmpmeshfn = fullfile(tmppath,'._out.mesh');
 tmpinrfn  = fullfile(tmppath,'._cgal_mesher.inr');
 cgalparam_fn = fullfile(tmppath,'._criteria.txt');
 
-savefn = add_extension(tmpinrfn,'.inr');
-if ~(isa(mask,'uint8') || isa(mask,'uint16') || ...
-        isa(mask,'single') || isa(mask,'double'))
-    warning('image2mesh:UnsupportedType','Converting image to uint8 type');
+%% VOLUME DATA TYPE CHECK!!!! 
+% by S.Wojtkiewicz
+% CGAL meshing library works only with uint8 labeled images!!!
+
+uint8_max = 2^8-1;
+max_mask = max(max(max(mask)));
+dtype=class(mask);
+if(strcmp(dtype,'uint8') || strcmp(dtype,'int8') || strcmp(dtype,'uint16') || strcmp(dtype,'int16'))
+    if max_mask > uint8_max
+        error('labeled image has values greater than 255 (uint8_max = 2^8-1). CGAL meshing library works only with uint8 labeled images.');
+    end
+    if sum(sum(sum(mask<0))) > 0
+        error('labeled image has negative values. CGAL meshing library works only with uint8 labeled images.');
+    end
+%     mask = mask*uint8_max/max(max(max(mask)));
     mask = uint8(mask);
+else
+    error(['volume format not supported: ' dtype '. CGAL meshing library works only with uint8 labeled images.']);
 end
 
-% Save to INRIA file format
-write_row_major = false;
-saveinr(mask,savefn,param,write_row_major);
 
+%%
+savefn = add_extension(tmpinrfn,'.inr');
+saveinr(mask,savefn,param);
+
+
+%%
 % Set up the necessary parameters for meshing
 facet_angle = 25; facet_size = 3; facet_distance = 2;
 cell_radius_edge = 3; cell_size = 3; % general tet size of all regions
@@ -58,11 +74,6 @@ fprintf(fid,'%d\n',special_subdomain_label);
 fprintf(fid,'%f\n',special_size);
 fclose(fid);
 
-
-warning('off','MATLAB:DELETE:FileNotFound');
-delete(tmpmeshfn);
-warning('on','MATLAB:DELETE:FileNotFound');
-
 % Run the executable
 syscommand = GetSystemCommand('image2mesh_cgal');
 if ~ispc
@@ -72,29 +83,24 @@ makemeshcommand = ['! "' syscommand '" "' savefn '" "' cgalparam_fn '" "' tmpmes
 eval(makemeshcommand);
 
 % Read the resulting mesh
-[e p] = readMEDIT(tmpmeshfn);
-if isfield(param,'Offset')
-    if isfield(param,'TransformMatrix')
-        transformM = [param.TransformMatrix(1:3);param.TransformMatrix(4:6);param.TransformMatrix(7:9)]
-        finalOffset = param.Offset*transformM
-    else
-        finalOffset = param.Offset;
-    end
-    p = p + repmat(finalOffset,size(p,1),1);
-end
+[e, p] = readMEDIT(tmpmeshfn);
+% if isfield(param,'Offset')
+%     p = p + repmat(param.Offset,size(p,1),1);
+% end
 
 % Remove possible extra nodes that might be left out in 'p' list
 % CGAL tends to do this.
-[e p] = remove_unused_nodes(e,p,4);
-% nodes = unique([e(:,1);e(:,2);e(:,3);e(:,4)]);
-% p = p(nodes,:);
-% [tf ee] = ismember(e(:,1:4),nodes);
-% if size(e,2) > 4
-% 	e = [ee e(:,5:end)];
-% else
-%     e = ee;
-% end
+
+nodes = unique([e(:,1);e(:,2);e(:,3);e(:,4)]);
+p = p(nodes,:);
+[tf, ee] = ismember(e(:,1:4),nodes);
+if size(e,2) > 4
+	e = [ee e(:,5:end)];
+else
+    e = ee;
+end
 warning('off','MATLAB:DELETE:FileNotFound');
 delete(cgalparam_fn,tmpinrfn);
 if delmedit, delete(tmpmeshfn); end
 warning('on','MATLAB:DELETE:FileNotFound');
+
