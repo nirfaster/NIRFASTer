@@ -111,8 +111,7 @@ end
 
 % find fiducial files
 fid_loc = what('fiducials');
-foote = fid_loc.path;
-fids = dir([foote '/fiducials_*']);
+fids = dir([fid_loc.path '/fiducials_*']);
 varnames = {'Select System'};
 for i=1:size(fids)
     varnames{i+1} = fids(i).name(11:end-2);
@@ -311,7 +310,7 @@ mesh = load_mesh(handles.meshloc);
 if strcmp(mesh.type,'spec') || strcmp(mesh.type,'spec_bem')   
     gui_set_chromophores('mesh',handles.meshloc);
 else
-   % gui_launcher
+%     gui_launcher
 end
 
 
