@@ -235,82 +235,94 @@ detectors_string = char(detectors_string);
 
 s = eval(sources_string);
 d = eval(detectors_string);
-link_string = '[';
-for si=1:size(s,1)
-    for di=1:size(d,1)
-        link_string = [link_string ' ' num2str(si) ' ' num2str(di) ' 1;'];
+
+if isempty(s) || isempty(d)
+    if isempty(s)
+        disp('Sources not specified.')
     end
-end
-link_string = strcat(link_string, ']');
-
-fixed = get(handles.fix_sd,'Value');
-distributed_source = get(handles.distributed_source,'Value');
-
-content{end+1} = strcat('mesh_tmp = load_mesh(''',handles.meshloc,''');');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp.link = ',link_string,';');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp.source.coord = ',sources_string,';');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp.source.num = (1:size(',sources_string,',1))'';');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp.source.fwhm = zeros(size(',sources_string,',1),1);');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp.source.fixed = ',num2str(fixed),';');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp.source.distributed = ',num2str(distributed_source),';');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp.meas.coord = ',detectors_string,';');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp.meas.num = (1:size(',detectors_string,',1))'';');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp.meas.fixed = ',num2str(fixed),';');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh_tmp = minband_opt(mesh_tmp);');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('save_mesh(mesh_tmp,''',handles.meshloc,''');');
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = 'clear mesh_tmp';
-if ~batch
-    evalin('base',content{end});
-end
-content{end+1} = strcat('mesh = load_mesh(''',handles.meshloc,''');');
-if ~batch
-    evalin('base',content{end});
-end
-        
-set(mainGUIdata.script, 'String', content);
-guidata(nirfast, mainGUIdata);
-
-mesh = load_mesh(handles.meshloc);
-if strcmp(mesh.type,'spec') || strcmp(mesh.type,'spec_bem')   
-    gui_set_chromophores('mesh',handles.meshloc);
+    if isempty(d)
+        disp('Detectors not specified.')
+    end
+    
 else
-%     gui_launcher
+
+    link_string = '[';
+    for si=1:size(s,1)
+        for di=1:size(d,1)
+            link_string = [link_string ' ' num2str(si) ' ' num2str(di) ' 1;'];
+        end
+    end
+    link_string = strcat(link_string, ']');
+
+    fixed = get(handles.fix_sd,'Value');
+    distributed_source = get(handles.distributed_source,'Value');
+
+    content{end+1} = strcat('mesh_tmp = load_mesh(''',handles.meshloc,''');');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp.link = ',link_string,';');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp.source.coord = ',sources_string,';');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp.source.num = (1:size(',sources_string,',1))'';');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp.source.fwhm = zeros(size(',sources_string,',1),1);');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp.source.fixed = ',num2str(fixed),';');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp.source.distributed = ',num2str(distributed_source),';');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp.meas.coord = ',detectors_string,';');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp.meas.num = (1:size(',detectors_string,',1))'';');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp.meas.fixed = ',num2str(fixed),';');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh_tmp = minband_opt(mesh_tmp);');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('save_mesh(mesh_tmp,''',handles.meshloc,''');');
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = 'clear mesh_tmp';
+    if ~batch
+        evalin('base',content{end});
+    end
+    content{end+1} = strcat('mesh = load_mesh(''',handles.meshloc,''');');
+    if ~batch
+        evalin('base',content{end});
+    end
+
+    set(mainGUIdata.script, 'String', content);
+    guidata(nirfast, mainGUIdata);
+
+    mesh = load_mesh(handles.meshloc);
+    if strcmp(mesh.type,'spec') || strcmp(mesh.type,'spec_bem')   
+        gui_set_chromophores('mesh',handles.meshloc);
+    else
+    %     gui_launcher
+    end
 end
 
 
