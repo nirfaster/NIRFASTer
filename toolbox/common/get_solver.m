@@ -11,7 +11,7 @@ function [solver_out] = get_solver(solver_in)
 %   with CUDA technology is present, the BiConjugate Gradient Stabilized
 %   method parallelized over GPU is used. SOLVER_OUT is set to
 %   'BiCGStab_GPU'. Otherwise, the BiConjugate Gradient Stabilized method
-%   parallelized over GPU is used. SOLVER_OUT is set to 'BiCGStab_CPU'.
+%   parallelized over CPU is used. SOLVER_OUT is set to 'BiCGStab_CPU'.
 % 
 % [SOLVER_OUT] = GET_SOLVER(SOLVER_IN) Check if the user specified solver
 %   SOLVER_IN is supported and copies it onto SOLVER_OUT. Issues warning
